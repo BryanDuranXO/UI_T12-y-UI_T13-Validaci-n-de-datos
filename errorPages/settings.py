@@ -42,7 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-    'users'
+    'users',
+    'productos',
+    'categorias',
+    'rest_framework',
+    'alumnos',
+    'rest_framework_simplejwt',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +59,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
+
+#constante prohibida:
+#permitir la conexion de cualquier origen a la app
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 ROOT_URLCONF = 'errorPages.urls'
 
@@ -143,8 +155,30 @@ LOGIN_REDIRECT_URL = '/home' # Dónde irán los usuarios tras iniciar sesión
 LOGOUT_REDIRECT_URL = '/users/login/'
 
 
-
+SEARCH_API_KEY='AIzaSyDgDXqw-LrWKjSs_8HnTVMjYF6RmiWSZUw'
+SEARCH_ENGINE_ID='814af8d084c1f4965'
 
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
+#MIAS
+#SEARCH_API_KEY = ''
+#SEARCH_ENGINE_ID='b7b6c6e848e004e3d'
+
+REST_FRAMEWORK={
+    'DEFAUL_AUTHENTICATION_CLASSES':(
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+AUTH_USER_MODEL= 'users.CustomUser'
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+#Configuración para Gmail
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+# Usar su correo de UTEZ
+EMAIL_HOST_USER = "alexisduranduran105@gmail.com"
+# Obtener de https://myaccount.google.com/apppasswords
+EMAIL_HOST_PASSWORD = "ocyd zpac nkua mzqj"
